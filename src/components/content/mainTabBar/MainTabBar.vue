@@ -25,8 +25,8 @@
   </div>
 </template>
 <script>
-import TabBar from '@/components/common/TabBar/TabBar.vue'
-import TabBarItem from '@/components/common/TabBar/TabBarItem.vue'
+import TabBar from '@/components/common/tabbar/TabBar.vue'
+import TabBarItem from '@/components/common/tabbar/TabBarItem.vue'
 
 export default {
   components: {

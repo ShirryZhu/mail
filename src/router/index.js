@@ -3,15 +3,15 @@ import Router from "vue-router";
 
 Vue.use(Router)
 
-const Home = () => import('../pages/home/Home.vue')
-const Cart = () => import('../pages/cart/Cart.vue')
-const Category = () => import('../pages/category/Category.vue')
-const Profile = () => import('../pages/profile/Profile.vue')
+const Home = () => import('@/pages/home/Home.vue')
+const Cart = () => import('@/pages/cart/Cart.vue')
+const Category = () => import('@/pages/category/Category.vue')
+const Profile = () => import('@/pages/profile/Profile.vue')
 
 const routes = [
   {
     path: '',
-    redirect: Home
+    redirect: '/home'
   },
   {
     path: '/home',
