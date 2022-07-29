@@ -3,14 +3,24 @@
     <nav-bar class="home-nav">
       <div slot="center">购物街</div>
     </nav-bar>
-    <scroll class="wrapper">
+    <scroll
+      class="wrapper"
+      ref="scroll"
+      :probe-type="3"
+      @scroll="contentScroll"
+      @pullingUp="loadMore"
+    >
       <home-swiper :banners="banners.list"></home-swiper>
       <recommend-view :recommends="recommends.list" />
       <feature-view />
-      <tab-control :titles="['流行', '新款', '精选']" class="tab-control" @tabClick="tabClick" />
+      <tab-control
+        :titles="['流行', '新款', '精选']"
+        class="tab-control"
+        @tabClick="tabClick"
+      />
       <goods-list :goods="goodsList" />
     </scroll>
-    <back-top></back-top>
+    <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
   </div>
 </template>
 <script>
@@ -32,12 +42,12 @@ export default {
       banners: [],
       recommends: [],
       goods: {
-        'pop': { page: 0, list: [] },
-        'new': { page: 0, list: [] },
-        'sell': { page: 0, list: [] }
+        pop: { page: 0, list: [] },
+        new: { page: 0, list: [] },
+        sell: { page: 0, list: [] },
       },
       currentType: 'pop',
-      scroll: null
+      isShowBackTop: false,
     }
   },
   components: {
@@ -48,7 +58,7 @@ export default {
     TabControl,
     GoodsList,
     Scroll,
-    BackTop
+    BackTop,
   },
   created() {
     this.getHomeMultidata()
@@ -73,34 +83,46 @@ export default {
           break
       }
     },
+    backClick() {
+      // console.log('backTop已被监听')
+      this.$refs.scroll.scrollTo(0, 0)
+    },
+    contentScroll(position) {
+      this.isShowBackTop = -position.y > 1000
+    },
+    loadMore() {
+      this.getHomeGoods(this.currentType)
+
+      this.$refs.scroll.scroll.refresh()
+    },
 
     /**
      * 网络请求相关的方法
      */
     getHomeMultidata() {
       // 请求多个数据
-      getHomeMultidata()
-        .then(res => {
-          this.banners = res.data.banner
-          this.recommends = res.data.recommend
-        })
+      getHomeMultidata().then((res) => {
+        this.banners = res.data.banner
+        this.recommends = res.data.recommend
+      })
     },
     getHomeGoods(type) {
       const page = this.goods[type].page + 1
       // 请求商品数据
-      getHomeGoods(type, page).then(res => {
+      getHomeGoods(type, page).then((res) => {
         // console.log(res)
         // console.log(page)
-        this.goods[type].list = res.data.list
+        this.goods[type].list.push(...res.data.list)
         this.goods[type].page++
+        this.$refs.scroll.finishPullUp()
       })
-    }
+    },
   },
   computed: {
     goodsList() {
       return this.goods[this.currentType].list
-    }
-  }
+    },
+  },
 }
 </script>
 <style scoped>

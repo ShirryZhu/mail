@@ -13,19 +13,19 @@
 </template>
 <script>
 export default {
-  name: "TabControl",
+  name: 'TabControl',
   props: {
     titles: {
       type: Array,
       default() {
-        return [];
+        return []
       },
     },
   },
   data() {
     return {
       currentIndex: 0,
-    };
+    }
   },
   methods: {
     itemClick(index) {
@@ -33,7 +33,7 @@ export default {
       this.$emit('tabClick', index)
     },
   },
-};
+}
 </script>
 <style scoped>
 .tab-control {

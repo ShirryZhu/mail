@@ -11,24 +11,24 @@ export default {
     path: String,
     activeColor: {
       type: String,
-      default: "red"
-    }
+      default: 'red',
+    },
   },
   computed: {
     isActive() {
-      return this.$route.path.indexOf(this.path) !== -1;
+      return this.$route.path.indexOf(this.path) !== -1
     },
     styleColor() {
-      return this.isActive ? this.activeColor : "";
-    }
+      return this.isActive ? this.activeColor : ''
+    },
   },
   methods: {
     itemClick() {
       // catch防止点击相同路由报错
-      this.$router.replace(this.path).catch(err => {});
-    }
-  }
-};
+      this.$router.replace(this.path).catch((err) => {})
+    },
+  },
+}
 </script>
 <style>
 .tab-bar-item {

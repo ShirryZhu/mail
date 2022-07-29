@@ -13,20 +13,20 @@ export default {
       type: Array,
       default() {
         return []
-      }
-    }
+      },
+    },
   },
   components: {
-    GoodsListItem
-  }
+    GoodsListItem,
+  },
 }
 </script>
 <style scoped>
-  .goods {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+.goods {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 
-    padding: 2px;
-  }
+  padding: 2px;
+}
 </style>

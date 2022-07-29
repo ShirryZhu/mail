@@ -3,7 +3,7 @@
     <swiper>
       <swiper-item v-for="(item, index) in banners" :key="item.link + index">
         <a :href="item.link">
-          <img :src="item.image">
+          <img :src="item.image" />
         </a>
       </swiper-item>
     </swiper>
@@ -18,15 +18,13 @@ export default {
       type: Array,
       default() {
         return []
-      }
-    }
+      },
+    },
   },
   components: {
     Swiper,
-    SwiperItem
-  }
+    SwiperItem,
+  },
 }
 </script>
-<style lang="">
-  
-</style>
+<style lang=""></style>
