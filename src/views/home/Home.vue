@@ -46,6 +46,9 @@ import RecommendView from './childComps/RecommendView.vue'
 import FeatureView from './childComps/FeatureView.vue'
 
 import { getHomeMultidata, getHomeGoods } from '@/network/home'
+
+import { HomeGoodsItem } from '@/common/class'
+
 import { debounce } from '@/common/utils'
 
 export default {
@@ -62,7 +65,7 @@ export default {
       isShowBackTop: false,
       isTabFixed: false,
       tabOffsetTop: 0,
-      saveY: 0
+      saveY: 0,
     }
   },
   components: {
@@ -159,7 +162,10 @@ export default {
   },
   computed: {
     goodsList() {
-      return this.goods[this.currentType].list
+      const resList = this.goods[this.currentType].list
+      const newList = resList.map((item) => new HomeGoodsItem(item))
+      // console.log('newList', newList)
+      return newList
     },
   },
 }
@@ -203,5 +209,4 @@ export default {
   right: 0;
   z-index: 9;
 }
-
 </style>
