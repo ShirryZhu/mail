@@ -20,7 +20,7 @@
       @click.native="backClick"
       v-show="isShowBackTop"
     ></back-top>
-    <detail-bottom-bar />
+    <detail-bottom-bar @addCart="addCart" />
   </div>
 </template>
 <script>
@@ -33,7 +33,6 @@ import DetailParams from './childComps/DetailParams.vue'
 import DetailCommentInfo from './childComps/DetailCommentInfo.vue'
 import GoodsList from '@/components/content/goods/GoodsList.vue'
 import DetailBottomBar from './childComps/DetailBottomBar.vue'
-
 import Scroll from '@/components/common/scroll/Scroll.vue'
 
 import { itemImageMixin, backTopMixin } from '@/common/mixin'
@@ -103,11 +102,23 @@ export default {
           }
         }
       }
-
     },
     navClick(index) {
       this.$refs.scroll.scrollTo(0, this.themeTopYs[index])
     },
+    addCart() {
+      // 1. 获取购物车需要展示的信息(包括：图片，描述，价格)
+      const product = {}
+      product.iid = this.iid
+      product.image = this.topImages[0]
+      product.title = this.goods.title
+      product.desc = this.goods.desc
+      product.price = this.goods.realPrice
+      // console.log(product)
+
+      // 2. 将商品添加到购物车上(Vuex保存所有加入购物车的商品)
+      this.$store.dispatch('addCart', product)
+    }
   },
   components: {
     DetailNav,

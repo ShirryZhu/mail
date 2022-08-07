@@ -15,13 +15,20 @@
       </div>
     </div>
     <div class="bottom-right">
-      <div class="cart">加入购物车</div>
+      <div class="cart" @click="addToCart">加入购物车</div>
       <div class="buy">购买</div>
     </div>
   </div>
 </template>
 <script>
-export default {}
+export default {
+  name: 'DeatilBottomBar',
+  methods: {
+    addToCart() {
+      this.$emit('addCart')
+    }
+  }
+}
 </script>
 <style scoped>
 #detail-bottom-bar {
