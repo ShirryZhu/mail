@@ -39,7 +39,6 @@ import NavBar from '@/components/common/navbar/NavBar.vue'
 import TabControl from '@/components/content/tabControl/TabControl.vue'
 import GoodsList from '@/components/content/goods/GoodsList.vue'
 import Scroll from '@/components/common/scroll/Scroll.vue'
-import BackTop from '@/components/content/backtop/BackTop.vue'
 
 import HomeSwiper from './childComps/HomeSwiper.vue'
 import RecommendView from './childComps/RecommendView.vue'
@@ -49,7 +48,7 @@ import { getHomeMultidata, getHomeGoods } from '@/network/home'
 
 import { HomeGoodsItem } from '@/common/class'
 
-import { itemImageLoad } from '@/common/mixin'
+import { itemImageMixin, backTopMixin } from '@/common/mixin'
 
 export default {
   data() {
@@ -62,7 +61,7 @@ export default {
         sell: { page: 0, list: [] },
       },
       currentType: 'pop',
-      isShowBackTop: false,
+      // isShowBackTop: false,
       isTabFixed: false,
       tabOffsetTop: 0,
       saveY: 0,
@@ -77,7 +76,6 @@ export default {
     TabControl,
     GoodsList,
     Scroll,
-    BackTop,
   },
   created() {
     this.getHomeMultidata()
@@ -85,7 +83,7 @@ export default {
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
   },
-  mixins: [itemImageLoad],
+  mixins: [itemImageMixin, backTopMixin],
   // mounted() {
   //   // 1. 监听GoodsListItem中图片的加载
   //   const refresh = debounce(this.$refs.scroll.refresh, 200)
@@ -122,9 +120,6 @@ export default {
       }
       this.$refs.tabcontrol1.currentIndex = index
       this.$refs.tabcontrol2.currentIndex = index
-    },
-    backClick() {
-      this.$refs.scroll.scrollTo(0, 0)
     },
     contentScroll(position) {
       this.isShowBackTop = -position.y > 1000

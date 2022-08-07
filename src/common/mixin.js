@@ -1,6 +1,8 @@
 import { debounce } from "./utils"
 
-export const itemImageLoad = {
+import BackTop from '@/components/content/backtop/BackTop.vue'
+
+export const itemImageMixin = {
   mounted() {
     // 1. 监听GoodsListItem中图片的加载
     const refresh = debounce(this.$refs.scroll.refresh, 200)
@@ -8,5 +10,22 @@ export const itemImageLoad = {
       refresh()
     }
     this.$bus.$on('itemImageLoad', this.itemImageListener)
+  },
+}
+
+export const backTopMixin = {
+  components: {
+    BackTop
+  },
+  data() {
+    return {
+      isShowBackTop: false,
+    }
+  },
+  methods: {
+    backClick() {
+      this.$refs.scroll.scrollTo(0, 0)
+      this.$refs.scroll.refresh()
+    },
   },
 }

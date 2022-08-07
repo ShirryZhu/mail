@@ -20,6 +20,7 @@
       @click.native="backClick"
       v-show="isShowBackTop"
     ></back-top>
+    <detail-bottom-bar />
   </div>
 </template>
 <script>
@@ -31,13 +32,13 @@ import DetailGoodsInfo from './childComps/DetailGoodsInfo.vue'
 import DetailParams from './childComps/DetailParams.vue'
 import DetailCommentInfo from './childComps/DetailCommentInfo.vue'
 import GoodsList from '@/components/content/goods/GoodsList.vue'
-import BackTop from '@/components/content/backtop/BackTop.vue'
+import DetailBottomBar from './childComps/DetailBottomBar.vue'
 
 import Scroll from '@/components/common/scroll/Scroll.vue'
 
-import { itemImageLoad } from '@/common/mixin'
+import { itemImageMixin, backTopMixin } from '@/common/mixin'
 
-import { debounce, formatThemeTopYs } from '@/common/utils'
+import { debounce } from '@/common/utils'
 
 import {
   getDetail,
@@ -64,7 +65,6 @@ export default {
       recommends: [],
       themeTopYs: [],
       isLoad: false,
-      isShowBackTop: false,
       itemImageListener: null,
       getThemeTopYs: null,
     }
@@ -79,10 +79,6 @@ export default {
       }
       // 2. 给themeTopYs赋值
       this.getThemeTopYs()
-    },
-    backClick() {
-      this.$refs.scroll.scrollTo(0, 0)
-      this.$refs.scroll.refresh()
     },
     contentScroll(position) {
       // 1. 判断backtop组件显示条件
@@ -123,18 +119,9 @@ export default {
     DetailParams,
     DetailCommentInfo,
     GoodsList,
-    BackTop,
+    DetailBottomBar
   },
-  // watch: {
-  //   themeTopYs(val) {
-  //     console.log('监视属性被触发')
-  //     if(val.length === 4) {
-  //       return formatThemeTopYs(val)
-  //     }
-  //     return val
-  //   }
-  // },
-  mixins: [itemImageLoad],
+  mixins: [itemImageMixin, backTopMixin],
   created() {
     // 1. 保存传入的iid
     this.iid = this.$route.params.iid
@@ -211,7 +198,7 @@ export default {
       this.themeTopYs.push(-this.$refs.params.$el.offsetTop||-this.$refs.comment.$el.offsetTop||-this.$refs.recommends.$el.offsetTop)
       this.themeTopYs.push(-this.$refs.comment.$el.offsetTop||-this.$refs.recommends.$el.offsetTop)
       this.themeTopYs.push(-this.$refs.recommends.$el.offsetTop)
-      console.log(this.themeTopYs)
+      // console.log(this.themeTopYs)
     }, 100)
   },
   destroyed() {
@@ -227,11 +214,11 @@ export default {
   background-color: #fff;
 }
 .detail-scroll {
-  height: calc(100vh - 44px);
+  height: calc(100vh - 93px);
   overflow: hidden;
 }
 
 .back-top {
-  bottom: 15px;
+  bottom: 55px;
 }
 </style>
