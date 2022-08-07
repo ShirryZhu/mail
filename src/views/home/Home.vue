@@ -49,7 +49,7 @@ import { getHomeMultidata, getHomeGoods } from '@/network/home'
 
 import { HomeGoodsItem } from '@/common/class'
 
-import { debounce } from '@/common/utils'
+import { itemImageLoad } from '@/common/mixin'
 
 export default {
   data() {
@@ -66,6 +66,7 @@ export default {
       isTabFixed: false,
       tabOffsetTop: 0,
       saveY: 0,
+      itemImageListener: null
     }
   },
   components: {
@@ -84,14 +85,15 @@ export default {
     this.getHomeGoods('new')
     this.getHomeGoods('sell')
   },
-  mounted() {
-    // 1. 监听GoodsListItem中图片的加载
-    const refresh = debounce(this.$refs.scroll.refresh, 200)
-    const itemImageListener = () => {
-      refresh()
-    }
-    this.$bus.$on('itemImageLoad', itemImageListener)
-  },
+  mixins: [itemImageLoad],
+  // mounted() {
+  //   // 1. 监听GoodsListItem中图片的加载
+  //   const refresh = debounce(this.$refs.scroll.refresh, 200)
+  //   this.itemImageListener = () => {
+  //     refresh()
+  //   }
+  //   this.$bus.$on('itemImageLoad', this.itemImageListener)
+  // },
   activated() {
     this.$refs.scroll.scrollTo(0, this.saveY, 0)
     this.$refs.scroll.refresh()
@@ -100,9 +102,7 @@ export default {
     // 1. 保存Y的值
     this.saveY = this.$refs.scroll.scrollY
     // 2. 取消全局事件监听
-    // this.$bus.$off('itemImageLoad', () => {
-    //   console.log('取消全局事件监听')
-    // })
+    this.$bus.$off('itemImageLoad', this.itemImageListener)
   },
   methods: {
     /**

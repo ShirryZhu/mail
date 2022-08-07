@@ -1,5 +1,5 @@
 // 防抖函数
-export function debounce(func, delay) {
+export function debounce(func, delay = 50) {
   let timer = null
   return function (...args) {
     if (timer) clearTimeout(timer)
@@ -53,4 +53,14 @@ export function formatDate(date, fmt) {
 }
 function padLeftZero(str) {
   return ('00' + str).substr(str.length)
+}
+
+// 给themeTopYs格式化(防止中间两个数可能是NaN)
+export function formatThemeTopYs(themeTopYs) {
+  for (let i = 1; i < themeTopYs.length; i++) {
+    if (!themeTopYs[i]) {
+      themeTopYs[i] = themeTopYs[i + 1]
+    }
+  }
+  return themeTopYs
 }

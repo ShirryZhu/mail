@@ -1,6 +1,6 @@
 <template>
-  <!-- <div id="detail_params" v-if="Object.keys(paramInfo).length != 0"> -->
-  <div id="detail_params">
+  <div id="detail_params" v-if="Object.keys(paramsInfo).length != 0">
+  <!-- <div id="detail_params"> -->
     <table class="params_rule">
       <tbody>
         <tr
