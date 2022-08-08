@@ -114,7 +114,8 @@ export default {
       product.title = this.goods.title
       product.desc = this.goods.desc
       product.price = this.goods.realPrice
-      // console.log(product)
+      product.checked = false
+      console.log(typeof parseFloat(product.price))
 
       // 2. 将商品添加到购物车上(Vuex保存所有加入购物车的商品)
       this.$store.dispatch('addCart', product)

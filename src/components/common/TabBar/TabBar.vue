@@ -20,6 +20,6 @@ export default {
   bottom: 0;
 
   /* 实现tabbar上方阴影 */
-  box-shadow: 0 -3px 1px rgba(100, 100, 100, 0.15);
+  /* box-shadow: 0 -3px 1px rgba(100, 100, 100, 0.15); */
 }
 </style>
