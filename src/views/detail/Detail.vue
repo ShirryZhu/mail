@@ -21,6 +21,7 @@
       v-show="isShowBackTop"
     ></back-top>
     <detail-bottom-bar @addCart="addCart" />
+    <toast :message="message" :isShow="isShow" />
   </div>
 </template>
 <script>
@@ -34,6 +35,7 @@ import DetailCommentInfo from './childComps/DetailCommentInfo.vue'
 import GoodsList from '@/components/content/goods/GoodsList.vue'
 import DetailBottomBar from './childComps/DetailBottomBar.vue'
 import Scroll from '@/components/common/scroll/Scroll.vue'
+import Toast from '@/components/common/toast/Toast.vue'
 
 import { itemImageMixin, backTopMixin } from '@/common/mixin'
 
@@ -51,6 +53,19 @@ import { RecommendItem } from '@/common/class'
 
 export default {
   name: 'Detail',
+  components: {
+    DetailNav,
+    Scroll,
+    DetailSwiper,
+    DetailBaseInfo,
+    DetailShopInfo,
+    DetailGoodsInfo,
+    DetailParams,
+    DetailCommentInfo,
+    GoodsList,
+    DetailBottomBar,
+    Toast
+  },
   data() {
     return {
       iid: null,
@@ -66,6 +81,8 @@ export default {
       isLoad: false,
       itemImageListener: null,
       getThemeTopYs: null,
+      message: '',
+      isShow: false
     }
   },
   methods: {
@@ -119,19 +136,14 @@ export default {
 
       // 2. 将商品添加到购物车上(Vuex保存所有加入购物车的商品)
       this.$store.dispatch('addCart', product)
+      this.message = '加入购物车成功'
+      this.isShow = true
+
+      setTimeout(() => {
+        this.isShow = false
+        this.message = ''
+      }, 1500)
     }
-  },
-  components: {
-    DetailNav,
-    Scroll,
-    DetailSwiper,
-    DetailBaseInfo,
-    DetailShopInfo,
-    DetailGoodsInfo,
-    DetailParams,
-    DetailCommentInfo,
-    GoodsList,
-    DetailBottomBar
   },
   mixins: [itemImageMixin, backTopMixin],
   created() {

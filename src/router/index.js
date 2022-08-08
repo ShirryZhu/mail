@@ -16,29 +16,53 @@ const routes = [
   },
   {
     path: '/home',
-    component: Home
+    component: Home,
+    meta: {
+      title: '首页'
+    }
   },
   {
     path: '/cart',
-    component: Cart
+    component: Cart,
+    meta: {
+      title: '购物车'
+    }
   },
   {
     path: '/category',
-    component: Category
+    component: Category,
+    meta: {
+      title: '分类'
+    }
   },
   {
     path: '/profile',
-    component: Profile
+    component: Profile,
+    meta: {
+      title: '个人中心'
+    }
   },
   {
     path: '/detail/:iid',
-    component: Detail
+    component: Detail,
+    meta: {
+      title: '商品详情'
+    }
   }
 ]
 
 const router = new Router({
   routes,
   mode: 'history'
+})
+
+router.beforeEach((to, from, next) => {
+  // 从from跳到to
+  // to 和 from 都是route类型的数据
+  document.title = to.meta.title
+  // 避免第一个title是undefined
+  // document.title = to.matched[0].meta.title
+  next()
 })
 
 export default router
