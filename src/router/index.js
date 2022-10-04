@@ -11,6 +11,18 @@ const Detail = () => import('@/views/detail/Detail.vue')
 
 const routes = [
   {
+    path: '/404',
+    name: '404',
+    component: () => import('@/components/common/404'),
+    meta: {
+      title: '这个页面找不到了'
+    }
+  },
+  {
+    path: '*',
+    redirect: '/404'
+  },
+  {
     path: '',
     redirect: '/home'
   },

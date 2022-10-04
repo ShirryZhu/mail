@@ -1,19 +1,14 @@
 # mall
 
-## Project setup
-```
-npm install
-```
+## 一、首页
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### 1. tabControl
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- 三个`div`，点击每个之后发生：
+  1. 切换样式。
+  2. 切换`Home`组件中`data`中的`currentType`的值，便于上拉加载时的请求对应数据。
+- 
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 2. goodList
+
+### 3. backTop
