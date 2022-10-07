@@ -9,7 +9,7 @@ export function request(config) {
 
   // 请求拦截
   instance.interceptors.request.use(config => {
-    console.log('请求拦截', config)
+    // console.log('请求拦截', config)
     return config
   }, err => {
     // console.log(err)
@@ -17,7 +17,7 @@ export function request(config) {
 
   // 响应拦截
   instance.interceptors.response.use(res => {
-    console.log('响应拦截', res)
+    // console.log('响应拦截', res)
     return res.data
   }, err => {
     // console.log(err)

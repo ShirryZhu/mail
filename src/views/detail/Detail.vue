@@ -81,7 +81,7 @@ export default {
       isLoad: false,
       itemImageListener: null,
       getThemeTopYs: null,
-      message: '',
+      message: '加入购物车成功',
       isShow: false
     }
   },
@@ -141,7 +141,7 @@ export default {
 
       setTimeout(() => {
         this.isShow = false
-        this.message = ''
+        // this.message = ''
       }, 1500)
     }
   },

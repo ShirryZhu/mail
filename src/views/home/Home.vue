@@ -61,7 +61,7 @@ export default {
         sell: { page: 0, list: [] },
       },
       currentType: 'pop',
-      // isShowBackTop: false,
+      isShowBackTop: false,
       isTabFixed: false,
       tabOffsetTop: 0,
       saveY: 0,
