@@ -144,3 +144,17 @@ const store = new Vuex.Store({
 
 ```
 
+### 2. CheckBox组件
+
+- 含参数`isChecked`：标记该`CheckBox`是否被选中。
+- `isChecked`参数可以修改`CheckBox`组件中相应的样式，如√的显示和隐藏。
+
+### 3. 购物车商品的数据结构
+
+![1665116080368](D:\a202206\vue2.0\mall\assets\1665116080368.png)
+
+### 4. 全选的双向绑定
+
+![1665116431934](D:\a202206\vue2.0\mall\assets\1665116431934.png)
+
+> ES6的`find`方法会遍历数组的所有元素，返回满足条件的第一个元素的值，否则返回`undefined`。
